@@ -59,3 +59,8 @@ for country in countries:
                 index = data[data['Страна'] == country].index
                 data.loc[index, param] = td
 
+# Запись результатов в файл
+with open('countries_params.db', 'wb') as file:
+    pickle.dump(data, file)
+
+print(data)
