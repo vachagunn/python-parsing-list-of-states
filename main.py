@@ -3,7 +3,11 @@
 
 import pandas as pd
 import requests
+import pickle
 from bs4 import BeautifulSoup
+
+# Показ всех записей (192 страны)
+pd.set_option('display.max_rows', None)
 
 url = "https://ru.wikipedia.org/wiki/Список_государств"
 
@@ -32,4 +36,26 @@ for row in table.find_all('tr')[1:]:
 data.index = [i for i in range(data.shape[0])]
 data = data.drop(['Номер', 'Флаг'], axis=1)
 
-print(data)
+base_url = "https://ru.wikipedia.org/wiki/"
+countries = list(data['Страна'])
+
+# Параметры для поиска
+params = ['Территория государства', 'Население']
+
+# Переход на страницы государств по отдельности для сбора данных по параметрам
+for country in countries:
+    page = requests.get(base_url + country)
+    soup = BeautifulSoup(page.text, 'lxml')
+
+    info_table = soup.find('table')
+    tr = info_table.find_all('tr')
+
+    for param in params:
+        for row in tr:
+            if row.find('a', title=param):
+                index = tr.index(row) + 1
+                td = tr[index].find('td').text.strip()
+
+                index = data[data['Страна'] == country].index
+                data.loc[index, param] = td
+
