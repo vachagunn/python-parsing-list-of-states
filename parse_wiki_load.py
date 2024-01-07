@@ -4,9 +4,14 @@ import re
 
 
 def edit(value):
-    string = str(value)
+    string = "".join(str(value).split()).replace(',', '.')
     pattern = r"\d+[\s,]?\d*[\s,]?\d*"
-    return re.search(pattern, string)
+    result = re.search(pattern, string)
+
+    if result:
+        result = float(result[0])
+
+    return result
 
 
 with open('countries_params.db', 'rb') as file:
