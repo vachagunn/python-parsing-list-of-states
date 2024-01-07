@@ -43,7 +43,7 @@ countries = list(data['Страна'])
 params = ['Территория государства', 'Население']
 
 # Переход на страницы государств по отдельности для сбора данных по параметрам
-for country in countries:
+for country in countries[:14]:
     page = requests.get(base_url + country)
     soup = BeautifulSoup(page.text, 'lxml')
 
