@@ -30,3 +30,15 @@ data['T'] = data['Территория государства'].apply(edit)
 data['P'] = data['Население'].apply(edit)
 
 print(data[['Страна', 'T', 'P']])
+
+print('Кол-во людей на планете: ', data['T'].sum())
+
+print('\nБольше всего населения:\n', data[data['P'] == data['P'].max()])
+print('\nМеньше всего населения:\n', data[data['P'] == data['P'].min()])
+
+print('\nБольше всего площади:\n', data[data['T'] == data['T'].max()])
+print('\nМеньше всего площади:\n', data[data['T'] == data['T'].min()])
+
+# Проверка данных (было - стало)
+print(data[['Территория государства', 'T']])
+print(data[['Население', 'P']])
