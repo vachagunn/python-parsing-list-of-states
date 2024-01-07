@@ -3,8 +3,10 @@ import pandas as pd
 import re
 
 
-def edit(x):
-    return type(x)  # не все значения string, есть none и float
+def edit(value):
+    string = str(value)
+    pattern = r"\d+[\s,]?\d*[\s,]?\d*"
+    return re.search(pattern, string)
 
 
 with open('countries_params.db', 'rb') as file:
