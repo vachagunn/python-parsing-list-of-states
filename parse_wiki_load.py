@@ -1,5 +1,6 @@
 import pickle
 import pandas as pd
+import re
 
 with open('countries_params.db', 'rb') as file:
     data = pickle.load(file)
