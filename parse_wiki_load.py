@@ -27,7 +27,6 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.float_format', lambda x: '%.2f' % x)
 
 data['T'] = data['Территория государства'].apply(edit)
+data['P'] = data['Население'].apply(edit)
 
-# print(data[['Территория государства', 'Население']])
-# print(data.info())
-print(data['T'])
+print(data[['Страна', 'T', 'P']])
